@@ -10,6 +10,8 @@ A self-contained python notebook, runnable on Google Colab, to discover Pytorch
   * `custom_loss(...)`
     * `return torch.mean((predictions - ground_truth) ** 2)`
     * And variants (`(...).mean()`,`torch.pow(..., 2)` etc.)
+  * `[:1]` vs `[0]`
+    * The first one keeps a batch dimension, the second one removes the batch dimension. In general you want to keep it.
   * Section 3: fatal training issues
     * Notice the validation accuracy is constant, your model is not learning
     * The training metrics oscillate because of randomness (data loading, dropout etc.), which disappears at validation time
