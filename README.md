@@ -5,7 +5,7 @@ A self-contained python notebook, runnable on Google Colab, to discover Pytorch
   <summary>There are a few questions in the Notebook, click here to see the answers</summary>
   
   * `LinearModel.forward(...)`
-    * `y = x @ self.weight.T + b`
+    * `y = x @ self.weight.T + self.bias`
     * And variants (`torch.matmul(...)`, `torch.transpose(...)` etc.)
   * `custom_loss(...)`
     * `return torch.mean((predictions - ground_truth) ** 2)`
