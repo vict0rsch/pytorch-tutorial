@@ -16,29 +16,28 @@ A self-contained python notebook, runnable on Google Colab, to discover Pytorch
 
     ```python
     class MLP(nn.Module):
-        def __init__(self, layer_sizes, activation=nn.ReLu(), dropout=0.5):
-            self.layer_sizes = layer_sizes
-            self.activation = activation
-            self.dropout = dropout
-
+        def __init__(self, layer_sizes, activation=nn.LeakyReLU(), dropout=0.5):
             super().__init__()
-    
+            
             self.layers = []
             for k, ls in enumerate(layer_sizes[:-2]):
                 self.layers.append(nn.Linear(ls, layer_sizes[k+1]))
                 self.layers.append(activation)
                 self.layers.append(nn.Dropout(dropout))
-            self.layers.append(nn.Linear(layer_sizes[-2], layer_sizes[-1])
+            self.layers.append(nn.Linear(layer_sizes[-2], layer_sizes[-1]))
             self.layers = nn.Sequential(*self.layers)
     
         def forward(self, x):
             return self.layers(x)
-
-    class CNN(nn.Module):
-        def __init__(...): # no change
-            ... # no change
-            mlp_sizes = [conv_channels[-1]] + mlp_layers
-            self.mlp = MLP(mlp_sizes, activation, dropout)
+    
+    def make_mlp(layer_sizes, activation=nn.LeakyReLU(), dropout=0.5):
+        layers = []
+        for k, ls in enumerate(layer_sizes[:-2]):
+            layers.append(nn.Linear(ls, layer_sizes[k+1]))
+            layers.append(activation)
+            layers.append(nn.Dropout(dropout))
+        layers.append(nn.Linear(layer_sizes[-2], layer_sizes[-1]))
+        return nn.Sequential(*layers)
 
     ```
   * Section 3: fatal training issues
