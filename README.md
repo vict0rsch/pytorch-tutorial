@@ -40,10 +40,11 @@ A self-contained python notebook, runnable on Google Colab, to discover Pytorch
         return nn.Sequential(*layers)
 
     ```
-  * Section 3: fatal training issues
-    * Notice the validation accuracy is constant, your model is not learning
-    * The training metrics oscillate because of randomness (data loading, dropout etc.), which disappears at validation time
-    * Notice the missing `error.backward()`: no gradients are computed, so no update to the model weights
-    * `torch.nn.CrossEntropyLoss()` takes **unormalized** probabilities, *i.e.* there should not be anything after the last `Linear` layer (same for regression)
-    * Not _fatal_ but still an issue: the learning rate is too large. Try `lr = 0.001` or `lr = 0.0005`
+  * Section 3: fatal training issues:
+    * Notice the validation accuracy is constant, your model is not learning.
+    * The training metrics oscillate because of randomness (data loading, dropout etc.), which disappears at validation time.
+    * Notice the missing `error.backward()`: no gradients are computed, so no update to the model weights.
+    * `torch.nn.CrossEntropyLoss()` takes **unormalized** probabilities, *i.e.* there should not be anything after the last `Linear` layer (same for regression).
+      * in the `CNN()` `mlp` `for` loop, indent the `activation` under `if i != (len(mlp_sizes) - 2):` because you don't want an activation for the last MLP layer.
+    * Not _fatal_ but still an issue: the learning rate is too large. Try `lr = 0.001` or `lr = 0.0005`.
 </details>
